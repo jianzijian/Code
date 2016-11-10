@@ -6,4 +6,8 @@ public class TestV2 {
 		System.out.println("456");
 	}
 
+	public void sysTestV2() {
+		System.out.println("sysTestV2");
+	}
+
 }
