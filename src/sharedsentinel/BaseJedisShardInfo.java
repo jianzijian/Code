@@ -21,4 +21,14 @@ public class BaseJedisShardInfo extends JedisShardInfo {
 		return hostAndPort.get();
 	}
 
+	@Override
+	public String getHost() {
+		return hostAndPort.get().getHost();
+	}
+
+	@Override
+	public int getPort() {
+		return hostAndPort.get().getPort();
+	}
+
 }

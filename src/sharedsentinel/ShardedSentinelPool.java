@@ -56,6 +56,9 @@ public class ShardedSentinelPool extends Pool<ShardedJedis> {
 			// clear idle instances,but the borrowed instances still need to be
 			// check while getSource
 			internalPool.clear();
+
+			System.err.println("switch master successed!old ip:" + oldHostAndPort.toString() + " new ip:"
+					+ currentHostAndPort.toString());
 		}
 	}
 
@@ -187,7 +190,9 @@ public class ShardedSentinelPool extends Pool<ShardedJedis> {
 							public void onMessage(String channel, String message) {
 								String[] switchMasterMsg = message.split(" ");
 								if (switchMasterMsg.length > 3) {
+									System.err.println("detect master:" + switchMasterMsg[0] + " switch");
 									if (masterName.equals(switchMasterMsg[0])) {
+										System.err.println("start to switch master:" + masterName);
 										// master node change
 										currentMaster = toHostAndPort(
 												Arrays.asList(switchMasterMsg[3], switchMasterMsg[4]));
